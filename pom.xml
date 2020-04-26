@@ -33,6 +33,7 @@
         <springboot.mapper.version>2.1.5</springboot.mapper.version>
         <pagehelper.version>1.2.5</pagehelper.version>
         <persistence.version>1.0.2</persistence.version>
+        <janino.version>2.7.8</janino.version>
     </properties>
 
     <dependencies>

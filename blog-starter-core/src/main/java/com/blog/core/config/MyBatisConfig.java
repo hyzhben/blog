@@ -1,5 +1,7 @@
 package com.blog.core.config;
 
+import com.blog.core.plugin.VersionInterceptor;
+import org.apache.ibatis.plugin.Interceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import tk.mybatis.spring.mapper.MapperScannerConfigurer;
@@ -20,5 +22,14 @@ public class MyBatisConfig {
         //两个做法都会导致扫描的到tk.mybatis的Mapper，就会产生重复定义的报错
         mapperScannerConfigurer.setBasePackage("**.blog.**.mapper");
         return mapperScannerConfigurer;
+    }
+
+    /**
+     * 添加乐观锁version处理插件
+     * @return
+     */
+    @Bean
+    public Interceptor versionInterceptor(){
+        return new VersionInterceptor();
     }
 }
