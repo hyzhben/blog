@@ -6,6 +6,8 @@ import com.blog.core.constants.BaseEnums;
 import com.blog.core.system.dto.User;
 import com.blog.core.system.service.UserService;
 import com.blog.core.util.Results;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,8 @@ public class UserController extends BaseController {
         return Results.successWithData(list, BaseEnums.SUCCESS.code(), BaseEnums.SUCCESS.desc());
     }
 
+    @ApiOperation("查找所有用户")
+    @ApiImplicitParam(name="paramMap",value="user",paramType="map")
     @PostMapping("/sys/user/qryUserByList")
     public Result qryUserByList(){
         Map<String,Object> paramMap = new HashMap<>();
