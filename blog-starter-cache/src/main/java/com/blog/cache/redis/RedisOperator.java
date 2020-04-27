@@ -17,7 +17,6 @@ import java.util.stream.Stream;
  * Redis 操作工具
  *
  * @version 1.0
- * @author bojiangzhou 2018-02-12
  */
 @Component
 public class RedisOperator {

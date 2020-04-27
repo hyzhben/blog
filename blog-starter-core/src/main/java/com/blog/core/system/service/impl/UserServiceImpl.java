@@ -20,8 +20,17 @@ public class UserServiceImpl extends BaseService<User>  implements UserService {
     private UserMapper userMapper;
 
 
+    /**
+     * @Cacheable：在方法执行前Spring先查看缓存中是否有数据，如果有数据，则直接返回缓存数据；没有则调用方法并将方法返回值放进缓存。
+     *
+     * @CachePut：将方法的返回值放到缓存中。
+     *
+     * @CacheEvict：删除缓存中的数据。
+     * @param param
+     * @return
+     */
     @Override
-    @Cacheable(cacheNames = "my-redis-cache1")
+    @Cacheable(value = "globalUser")
     public List<User> qryUserByList(Map<String, Object> param) {
         return userMapper.qryUserByList(param);
     }
