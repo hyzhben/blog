@@ -66,6 +66,7 @@
     <modules>
         <module>blog-starter-core</module>
         <module>blog-starter-cache</module>
+        <module>blog-starter-swagger</module>
     </modules>
 
 </project>
