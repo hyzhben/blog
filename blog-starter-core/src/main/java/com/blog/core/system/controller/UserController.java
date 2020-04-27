@@ -9,10 +9,12 @@ import com.blog.core.util.Results;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用户Controller
@@ -35,33 +37,11 @@ public class UserController extends BaseController {
         return Results.successWithData(list, BaseEnums.SUCCESS.code(), BaseEnums.SUCCESS.desc());
     }
 
-    @RequestMapping("/sys/user/queryOne/{userId}")
-    public Result queryOne(@PathVariable Long userId){
-        User user = userService.get(userId);
-        return Results.successWithData(user);
+    @PostMapping("/sys/user/qryUserByList")
+    public Result qryUserByList(){
+        Map<String,Object> paramMap = new HashMap<>();
+        List<User> list = userService.qryUserByList(paramMap);
+        return Results.successWithData(list, BaseEnums.SUCCESS.code(), BaseEnums.SUCCESS.desc());
     }
 
-    @PostMapping("/sys/user/save")
-    public Result save(@Valid @RequestBody User user){
-        user = userService.insertSelective(user);
-        return Results.successWithData(user);
-    }
-
-    @PostMapping("/sys/user/update")
-    public Result update(@Valid @RequestBody List<User> user){
-        user = userService.persistSelective(user);
-        return Results.successWithData(user);
-    }
-
-    @RequestMapping("/sys/user/delete")
-    public Result delete(User user){
-        userService.delete(user);
-        return Results.success();
-    }
-
-    @RequestMapping("/sys/user/delete/{userId}")
-    public Result delete(@PathVariable Long userId){
-        userService.delete(userId);
-        return Results.success();
-    }
 }

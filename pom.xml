@@ -7,17 +7,12 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.2.6.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.cn</groupId>
     <artifactId>blog</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>blog</name>
-    <description>Demo project for Spring Boot</description>
+    <packaging>pom</packaging>
 
-    <modules>
-        <module>blog-starter-core</module>
-    </modules>
 
     <properties>
         <java.version>1.8</java.version>
@@ -65,5 +60,11 @@
             </plugin>
         </plugins>
     </build>
+
+
+    <modules>
+        <module>blog-starter-core</module>
+        <module>blog-starter-cache</module>
+    </modules>
 
 </project>

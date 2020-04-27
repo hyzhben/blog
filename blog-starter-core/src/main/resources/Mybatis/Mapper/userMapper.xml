@@ -4,4 +4,7 @@
      <select id="selectAll" resultType="com.blog.core.system.dto.User">
           select * from sys_user d
      </select>
+     <select id="qryUserByList" resultType="com.blog.core.system.dto.User" parameterType="java.util.Map">
+          select * from sys_user d
+     </select>
 </mapper>
