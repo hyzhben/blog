@@ -34,4 +34,9 @@ public class UserServiceImpl extends BaseService<User>  implements UserService {
     public List<User> qryUserByList(Map<String, Object> param) {
         return userMapper.qryUserByList(param);
     }
+
+    @Override
+    public User qryUserByUsername(String username) {
+        return userMapper.qryUserByUsername(username);
+    }
 }

@@ -7,4 +7,7 @@
      <select id="qryUserByList" resultType="com.blog.core.system.dto.User" parameterType="java.util.Map">
           select * from sys_user d
      </select>
+     <select id="qryUserByUsername" resultType="com.blog.core.system.dto.User" parameterType="java.lang.String">
+           select * from sys_user d where d.username = #{username}
+     </select>
 </mapper>

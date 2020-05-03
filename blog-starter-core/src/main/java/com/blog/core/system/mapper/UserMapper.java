@@ -14,4 +14,6 @@ public interface UserMapper extends Mapper<User> {
      * 自定义查询条件
      */
     List<User> qryUserByList(Map<String,Object> param);
+
+    User qryUserByUsername(String username);
 }

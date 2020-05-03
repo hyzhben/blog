@@ -1,13 +1,10 @@
 package com.blog.core.system.dto;
 
 import com.blog.core.base.BaseDTO;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.blog.core.util.Dates;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 /**
  * 系统用户
@@ -16,17 +13,14 @@ import java.util.List;
  * @version 1.0
  * @author bojiangzhou 2017-12-31
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@Table(name = "SYS_USER")
 public class User extends BaseDTO {
     private static final long serialVersionUID = 1L;
+
+    public static final String FIELD_USERNAME = "username";
 
     /**
      * 用户ID
      */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @OrderBy("DESC")
     private Long userId;
     /**
      * 用户名

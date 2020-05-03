@@ -12,4 +12,6 @@ import java.util.Map;
 public interface UserService extends Service<User> {
 
     List<User> qryUserByList(Map<String,Object> param);
+
+    User qryUserByUsername(String username);
 }

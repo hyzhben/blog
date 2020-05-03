@@ -26,7 +26,11 @@ public enum BaseEnums implements BaseEnum<String,String> {
 
     VERSION_NOT_MATCH("record_not_exists_or_version_not_match", "记录版本不存在或不匹配"),
 
-    PARAMETER_NOT_NULL("parameter_not_be_null", "参数不能为空");
+    PARAMETER_NOT_NULL("parameter_not_be_null", "参数不能为空"),
+
+    FAIL_NOT_LOGIN("10000","请先登录"),
+
+    FAIL_USERNMAE_OR_PASSWORD("10001","用户名或密码错误");
 
     private String code;
 
@@ -46,7 +50,7 @@ public enum BaseEnums implements BaseEnum<String,String> {
     }
 
     @Override
-    public String code(){
+    public String   code(){
         return code;
     }
 
