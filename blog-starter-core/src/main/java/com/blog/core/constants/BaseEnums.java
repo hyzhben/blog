@@ -10,9 +10,9 @@ import java.util.Map;
  * @version 1.0
  */
 public enum BaseEnums implements BaseEnum<String,String> {
-    SUCCESS("request.success","请求成功"),
+    SUCCESS("0","请求成功"),
 
-    FAILURE("request failure","请求失败"),
+    FAILURE("9000","请求失败"),
 
     OPERATION_SUCCESS("operation.success","操作成功"),
 

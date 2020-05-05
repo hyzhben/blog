@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsUtils;
+
 
 @Configuration
 @EnableConfigurationProperties(SecurityProperties.class)
@@ -32,17 +34,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http
         //开启跨域cors()
-//                .cors().and().csrf().disable()
-//                .authorizeRequests().requestMatchers(CorsUtilt::isCorsRequest)
-//                .permitAll()
-//                .and()
+                .cors().and().csrf().disable()
+                .authorizeRequests().requestMatchers(CorsUtils::isCorsRequest)
+                .permitAll()
+                .and()
                 .authorizeRequests()
                 .antMatchers("/static/**","/webjars/**","/public/**","/login","favicon.ico")
                 .permitAll()//允许匿名访问的地址
                 .and()//使用and()方法相当于XML标签的关闭，这样允许我们继续配置父类节点
             .authorizeRequests()
                 .anyRequest()
-                .authenticated()//其他地址都需要进行认证
+                .authenticated()//\其他地址都需要进行认证
                 .and()
             .formLogin()//启动表单登录
                 .loginPage("/login")//登录页面

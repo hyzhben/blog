@@ -41,8 +41,8 @@ public class LoginController {
 
     @RequestMapping("/index")
     @ResponseBody
-    public String index() {
-        return "aaa";
+    public Result index() {
+        return Results.success(BaseEnums.SUCCESS.code(),BaseEnums.SUCCESS.desc());
     }
 
     @RequestMapping("/login/invalid")
