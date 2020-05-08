@@ -42,10 +42,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .antMatchers("/static/**","/webjars/**","/public/**","/login","favicon.ico")
                 .permitAll()//允许匿名访问的地址
                 .and()//使用and()方法相当于XML标签的关闭，这样允许我们继续配置父类节点
-            .authorizeRequests()
-                .anyRequest()
-                .authenticated()//\其他地址都需要进行认证
-                .and()
+//            .authorizeRequests()
+//                .anyRequest()
+//                .authenticated()//其他地址都需要进行认证
+//                .and()
             .formLogin()//启动表单登录
                 .loginPage("/login")//登录页面
                 .defaultSuccessUrl("/index")//默认的登录成功后的跳转地址

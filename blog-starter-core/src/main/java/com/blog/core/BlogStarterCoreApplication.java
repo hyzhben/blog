@@ -9,7 +9,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @ComponentScan({"com.blog.core","com.blog.cache","com.blog.swagger"})
 @SpringBootApplication
-@PropertySource(value = {"classpath:application-redis.properties"})
+@PropertySource(value = {"classpath:application-redis.properties","classpath:application-ftp.properties"})
 public class BlogStarterCoreApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
