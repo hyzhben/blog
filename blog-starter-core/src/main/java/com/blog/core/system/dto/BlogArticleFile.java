@@ -7,7 +7,7 @@ import java.util.Date;
  * @author 
  * 
  */
-public class ArticleFile implements Serializable {
+public class BlogArticleFile implements Serializable {
     /**
      * 上传的文件标识
      */
@@ -138,7 +138,7 @@ public class ArticleFile implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        ArticleFile other = (ArticleFile) that;
+        BlogArticleFile other = (BlogArticleFile) that;
         return (this.getFileId() == null ? other.getFileId() == null : this.getFileId().equals(other.getFileId()))
             && (this.getArticleId() == null ? other.getArticleId() == null : this.getArticleId().equals(other.getArticleId()))
             && (this.getFileName() == null ? other.getFileName() == null : this.getFileName().equals(other.getFileName()))

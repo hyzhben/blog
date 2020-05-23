@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.core.system.mapper.BlogArticleMapper">
+  <resultMap id="BaseResultMap" type="com.blog.core.system.dto.BlogArticle">
+    <id column="article_id" jdbcType="BIGINT" property="articleId" />
+    <result column="type_id" jdbcType="BIGINT" property="typeId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_user" jdbcType="BIGINT" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="BIGINT" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.blog.core.system.dto.BlogArticle">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    article_id, type_id, title, `status`, create_user, create_time, update_user, update_time, 
+    remark
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog_article
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from blog_article
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="article_id" keyProperty="articleId" parameterType="com.blog.core.system.dto.BlogArticle" useGeneratedKeys="true">
+    insert into blog_article (type_id, title, `status`, 
+      create_user, create_time, update_user, 
+      update_time, remark, content
+      )
+    values (#{typeId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{createUser,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="article_id" keyProperty="articleId" parameterType="com.blog.core.system.dto.BlogArticle" useGeneratedKeys="true">
+    insert into blog_article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="typeId != null">
+        #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.blog.core.system.dto.BlogArticle">
+    update blog_article
+    <set>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.blog.core.system.dto.BlogArticle">
+    update blog_article
+    set type_id = #{typeId,jdbcType=BIGINT},
+      title = #{title,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=INTEGER},
+      create_user = #{createUser,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.blog.core.system.dto.BlogArticle">
+    update blog_article
+    set type_id = #{typeId,jdbcType=BIGINT},
+      title = #{title,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=INTEGER},
+      create_user = #{createUser,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </update>
+  <select id="selectAll" resultType="com.blog.core.system.dto.BlogArticle">
+          select * from blog_article ba
+     </select>
+</mapper>

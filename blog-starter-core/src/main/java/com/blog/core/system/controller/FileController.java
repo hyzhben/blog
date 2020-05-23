@@ -24,7 +24,7 @@ public class FileController extends BaseController {
     @Autowired
     private FtpConfig ftpConfig;
 
-    @RequestMapping("/blog/uploadFiles")
+    @RequestMapping("/service/blog/uploadFiles")
     @ResponseBody
     public List<String> uploadFiles(MultipartFile[] files) throws IOException{
         List<String> picUrlList = new ArrayList<>();

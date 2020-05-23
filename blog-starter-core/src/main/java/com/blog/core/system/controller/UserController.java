@@ -32,7 +32,7 @@ public class UserController extends BaseController {
      * @return
      */
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-    @PostMapping("/sys/user/queryAll")
+    @PostMapping("/service/sys/queryAll")
     public Result queryAll(){
         List<User> list = userService.selectAll();
         logger.debug("userId:{},username:{},birthday:{}",list.get(0).getUserId(),list.get(0).getUsername(),list.get(0).getBirthday());
@@ -41,7 +41,7 @@ public class UserController extends BaseController {
 
     @ApiOperation("查找所有用户")
     @ApiImplicitParam(name="paramMap",value="user",paramType="map")
-    @PostMapping("/sys/user/qryUserByList")
+    @PostMapping("/service/sys/qryUserByList")
     public Result qryUserByList(){
         Map<String,Object> paramMap = new HashMap<>();
         List<User> list = userService.qryUserByList(paramMap);
