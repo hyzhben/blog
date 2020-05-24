@@ -41,4 +41,12 @@ public class FileController extends BaseController {
             return picUrlList;
     }
 
+    @RequestMapping("/service/blog/test2")
+    @ResponseBody
+        public List<String> test2(MultipartFile[] files){
+        List<String> picUrlList = new ArrayList<>();
+        picUrlList=UploadUtils.uploadFiles(files);
+        return picUrlList;
+    }
+
 }
