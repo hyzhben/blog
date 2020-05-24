@@ -4,7 +4,7 @@ import com.blog.core.base.BaseController;
 import com.blog.core.base.Result;
 import com.blog.core.constants.BaseEnums;
 import com.blog.core.system.dto.User;
-import com.blog.core.system.service.UserService;
+import com.blog.core.system.service.ISysService;
 import com.blog.core.util.Results;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -25,26 +25,20 @@ import java.util.Map;
 public class UserController extends BaseController {
 
     @Autowired
-    private UserService userService;
+    private ISysService sysService;
 
     /**
      * Logger
      * @return
      */
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-    @PostMapping("/service/sys/queryAll")
-    public Result queryAll(){
-        List<User> list = userService.selectAll();
-        logger.debug("userId:{},username:{},birthday:{}",list.get(0).getUserId(),list.get(0).getUsername(),list.get(0).getBirthday());
-        return Results.successWithData(list, BaseEnums.SUCCESS.code(), BaseEnums.SUCCESS.desc());
-    }
 
     @ApiOperation("查找所有用户")
     @ApiImplicitParam(name="paramMap",value="user",paramType="map")
     @PostMapping("/service/sys/qryUserByList")
     public Result qryUserByList(){
         Map<String,Object> paramMap = new HashMap<>();
-        List<User> list = userService.qryUserByList(paramMap);
+        List<User> list = sysService.qryUserByList(paramMap);
         return Results.successWithData(list, BaseEnums.SUCCESS.code(), BaseEnums.SUCCESS.desc());
     }
 

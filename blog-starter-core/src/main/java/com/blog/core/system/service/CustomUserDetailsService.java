@@ -18,11 +18,11 @@ import java.util.Collection;
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserService userService;
+    private ISysService sysService;
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user= userService.qryUserByUsername(s) ;
+        User user= sysService.qryUserByUsername(s) ;
         if(user == null){
             throw new AccountNotExistsException("user.error.login.username-or-password.error");
         }

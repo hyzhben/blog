@@ -3,7 +3,7 @@ package com.blog.core.security.core;
 import com.blog.core.security.config.SecurityProperties;
 import com.blog.core.security.utils.MessageAccessor;
 import com.blog.core.system.dto.User;
-import com.blog.core.system.service.UserService;
+import com.blog.core.system.service.ISysService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -31,7 +31,7 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
     private SecurityProperties securityProperties;
 
     @Autowired
-    private UserService userService;
+    private ISysService sysService;
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
@@ -55,7 +55,7 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
        }
 
         if(e instanceof BadCredentialsException){
-            User user =userService.qryUserByUsername(username);
+            User user =sysService.qryUserByUsername(username);
             //如果有要清空错误密码数的需要在这里清空输入错误密码次数
         }
 

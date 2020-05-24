@@ -1,17 +1,22 @@
 package com.blog.core.system.controller;
 
 import com.blog.core.base.BaseController;
+import com.blog.core.base.Result;
 import com.blog.core.config.FtpConfig;
+import com.blog.core.constants.BaseEnums;
 import com.blog.core.util.FtpUtil;
+import com.blog.core.util.Results;
 import com.blog.core.util.UploadUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +31,7 @@ public class FileController extends BaseController {
 
     @RequestMapping("/service/blog/uploadFiles")
     @ResponseBody
-    public List<String> uploadFiles(MultipartFile[] files) throws IOException{
+    public Result uploadFiles(MultipartFile[] files) throws IOException{
         List<String> picUrlList = new ArrayList<>();
             if(files.length > 0){
                 logger.info("开始上传图片");
@@ -38,15 +43,14 @@ public class FileController extends BaseController {
                     picUrlList.add(picUrl);
                 }
             }
-            return picUrlList;
+            return Results.successWithData(picUrlList, BaseEnums.SUCCESS.code(),BaseEnums.SUCCESS.desc());
     }
 
-    @RequestMapping("/service/blog/test2")
+    @PostMapping(value="/service/blog/test2")
     @ResponseBody
-        public List<String> test2(MultipartFile[] files){
+        public List<String> test2(MultipartFile[] files, HttpServletRequest request){
         List<String> picUrlList = new ArrayList<>();
         picUrlList=UploadUtils.uploadFiles(files);
         return picUrlList;
     }
-
 }

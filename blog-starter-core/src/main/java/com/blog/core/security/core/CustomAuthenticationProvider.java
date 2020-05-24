@@ -4,7 +4,7 @@ import com.blog.core.exception.AccountNotExistsException;
 import com.blog.core.exception.PasswordErrorException;
 import com.blog.core.system.dto.User;
 import com.blog.core.system.service.CustomUserDetailsService;
-import com.blog.core.system.service.UserService;
+import com.blog.core.system.service.ISysService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 public class CustomAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
     @Autowired
-    private UserService userService;
+    private ISysService sysService;
 
     @Autowired
     private CustomUserDetailsService detailsService;
@@ -28,7 +28,7 @@ public class CustomAuthenticationProvider extends AbstractUserDetailsAuthenticat
 
     @Override
     protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken) throws AuthenticationException {
-        User user = userService.qryUserByUsername(username);
+        User user = sysService.qryUserByUsername(username);
         if (user == null) {
             throw new AccountNotExistsException("user.error.login.username-or-password.error");
         }
@@ -41,7 +41,7 @@ public class CustomAuthenticationProvider extends AbstractUserDetailsAuthenticat
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken) throws AuthenticationException {
         String username = userDetails.getUsername();
-        User user = userService.qryUserByUsername(username);
+        User user = sysService.qryUserByUsername(username);
 
 
         // 检查密码是否正确

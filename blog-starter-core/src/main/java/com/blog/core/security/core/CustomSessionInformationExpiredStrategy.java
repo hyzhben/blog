@@ -19,7 +19,7 @@ public class CustomSessionInformationExpiredStrategy implements SessionInformati
     @Override
     public void onExpiredSessionDetected(SessionInformationExpiredEvent sessionInformationExpiredEvent) throws IOException, ServletException {
         HttpServletRequest request = sessionInformationExpiredEvent.getRequest();
-        HttpServletResponse response = sessionInformationExpiredEvent.getResponse();
+            HttpServletResponse response = sessionInformationExpiredEvent.getResponse();
         LOGGER.warn("==> 并发登陆：当前账号在[{}]上登陆", request.getRequestURI());
     }
 }

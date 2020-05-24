@@ -54,7 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .and()
             .logout()
                 .logoutSuccessHandler(customLogoutSuccessHandler)//退出成功处理器，不能喝logoutSuccessUrl同时使用
-                .logoutSuccessUrl("/")//退出成功跳到首页
+//                .logoutSuccessUrl("/")//退出成功跳到首页
                 .deleteCookies("JSESSIONID", "SESSION") // 删除 Cookie
                 .and()
             .sessionManagement()

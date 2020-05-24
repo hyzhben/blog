@@ -3,7 +3,7 @@ package com.blog.core.system.controller;
 import com.blog.core.base.Result;
 import com.blog.core.constants.BaseEnums;
 import com.blog.core.system.dto.BlogArticle;
-import com.blog.core.system.service.BlogArticleService;
+import com.blog.core.system.service.IBlogService;
 import com.blog.core.util.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,13 +16,16 @@ import java.util.List;
 public class BlogArticleController {
 
     @Autowired
-    private BlogArticleService blogArticleService;
+    private IBlogService blogService;
 
-    @RequestMapping(value="/service/blog/qryBlogArticleList")
+   /* @RequestMapping(value="/service/blog/addArticle")
     @ResponseBody
-    public Result qryBlogArticleList(){
-        List<BlogArticle>  blogArticleList = blogArticleService.selectAll();
-        return  Results.successWithData(blogArticleList, BaseEnums.SUCCESS.code(), BaseEnums.SUCCESS.desc());
-    }
+    public Result addArticle(HttpServletRequest request){
+        String content = request.getParameter("content");
+        String state = request.getParameter("content");
+        String files = request.getParameter("files");
+        String title = request.getParameter("title");
+        String type = request.getParameter("type");
 
+    }*/
 }

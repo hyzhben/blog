@@ -3,7 +3,7 @@ package com.blog.core.system.controller;
 import com.blog.core.base.Result;
 import com.blog.core.constants.BaseEnums;
 import com.blog.core.system.dto.User;
-import com.blog.core.system.service.UserService;
+import com.blog.core.system.service.ISysService;
 import com.blog.core.util.Results;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
 
     @Autowired
-    private UserService userService;
+    private ISysService sysService;
 
     @RequestMapping(value="/login")
     @ResponseBody
@@ -48,12 +48,12 @@ public class LoginController {
     @RequestMapping("/login/invalid")
     @ResponseBody
     public String loginInvalid(){
-        return "超时";
+        return "invalid";
     }
 
     @RequestMapping("/login/out")
     @ResponseBody
     public String loginOut(){
-        return "登出";
+        return "out";
     }
 }

@@ -24,7 +24,7 @@ public class FtpUtil {
         if(!flag){
             return picHttpPath;
         }
-        picHttpPath = ftpConfig.getBasePath()+picSavePath+"/"+picNewName;
+        picHttpPath = picSavePath+"/"+picNewName;
         logger.info("【picHttpPath】"+picHttpPath);
         return picHttpPath;
     }

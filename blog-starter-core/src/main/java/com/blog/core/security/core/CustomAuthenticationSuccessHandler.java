@@ -1,7 +1,7 @@
 package com.blog.core.security.core;
 
 import com.blog.core.system.dto.User;
-import com.blog.core.system.service.UserService;
+import com.blog.core.system.service.ISysService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
@@ -18,12 +18,12 @@ import java.io.IOException;
 @Component
 public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
     @Autowired
-    private UserService userService;
+    private ISysService sysService;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
         String username = request.getParameter("username");
-        User user = userService.qryUserByUsername(username);
+        User user = sysService.qryUserByUsername(username);
 
         //登录成功清除错误密码数
         //        userService.loginSuccess(user.getUserId());
