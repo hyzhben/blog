@@ -35,7 +35,7 @@
     where article_id = #{articleId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyColumn="article_id" keyProperty="articleId" parameterType="com.blog.core.system.dto.BlogArticle" useGeneratedKeys="true">
-    insert into blog_article (type_id, title, `status`, 
+    insert into blog_article (type_id, title, status,
       create_user, create_time, update_user, 
       update_time, remark, content
       )
@@ -47,6 +47,9 @@
   <insert id="insertSelective" keyColumn="article_id" keyProperty="articleId" parameterType="com.blog.core.system.dto.BlogArticle" useGeneratedKeys="true">
     insert into blog_article
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        article_id,
+      </if>
       <if test="typeId != null">
         type_id,
       </if>
@@ -76,6 +79,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        #{articleId,jdbcType=BIGINT},
+      </if>
       <if test="typeId != null">
         #{typeId,jdbcType=BIGINT},
       </if>

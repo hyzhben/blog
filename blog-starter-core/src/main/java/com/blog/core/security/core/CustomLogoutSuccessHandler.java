@@ -26,6 +26,7 @@ public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         LOGGER.info("==> logout success");
+        httpServletRequest.getSession().removeAttribute("user");
         redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse,"/login/out");
     }
 }
