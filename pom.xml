@@ -34,6 +34,7 @@
         <swagger.version>1.9.1.RELEASE</swagger.version>
         <servlet.version>3.1.0</servlet.version>
         <commoms.net.version>3.6</commoms.net.version>
+        <json.lib.version>2.4</json.lib.version>
     </properties>
 
     <dependencies>

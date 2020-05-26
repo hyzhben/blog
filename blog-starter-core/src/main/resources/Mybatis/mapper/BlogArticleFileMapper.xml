@@ -6,15 +6,15 @@
     <result column="article_id" jdbcType="BIGINT" property="articleId" />
     <result column="file_name" jdbcType="VARCHAR" property="fileName" />
     <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
-    <result column="create_staff" jdbcType="BIGINT" property="createStaff" />
+    <result column="create_user" jdbcType="BIGINT" property="createUser" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_staff" jdbcType="BIGINT" property="updateStaff" />
+    <result column="update_user" jdbcType="BIGINT" property="updateUser" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   <sql id="Base_Column_List">
-    file_id, article_id, file_name, pic_url, create_staff, create_time, update_staff,
-    update_time, remark
+    file_id, article_id, file_name, pic_url, create_user, create_time, update_user, update_time,
+    remark
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select
@@ -26,17 +26,22 @@
     delete from blog_article_file
     where file_id = #{fileId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" keyColumn="file_id" keyProperty="fileId" parameterType="com.blog.core.system.dto.BlogArticleFile" useGeneratedKeys="true">
-    insert into blog_article_file (article_id, file_name, pic_url,
-      create_staff, create_time, update_staff,
-      update_time, remark)
-    values (#{articleId,jdbcType=BIGINT}, #{fileName,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR},
-      #{createStaff,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateStaff,jdbcType=BIGINT},
-      #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.blog.core.system.dto.BlogArticleFile">
+    insert into blog_article_file (file_id, article_id, file_name,
+      pic_url, create_user, create_time,
+      update_user, update_time, remark
+      )
+    values (#{fileId,jdbcType=BIGINT}, #{articleId,jdbcType=BIGINT}, #{fileName,jdbcType=VARCHAR},
+      #{picUrl,jdbcType=VARCHAR}, #{createUser,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP},
+      #{updateUser,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" keyColumn="file_id" keyProperty="fileId" parameterType="com.blog.core.system.dto.BlogArticleFile" useGeneratedKeys="true">
+  <insert id="insertSelective" parameterType="com.blog.core.system.dto.BlogArticleFile">
     insert into blog_article_file
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fileId != null">
+        file_id,
+      </if>
       <if test="articleId != null">
         article_id,
       </if>
@@ -46,14 +51,14 @@
       <if test="picUrl != null">
         pic_url,
       </if>
-      <if test="createStaff != null">
-        create_staff,
+      <if test="createUser != null">
+        create_user,
       </if>
       <if test="createTime != null">
         create_time,
       </if>
-      <if test="updateStaff != null">
-        update_staff,
+      <if test="updateUser != null">
+        update_user,
       </if>
       <if test="updateTime != null">
         update_time,
@@ -63,6 +68,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fileId != null">
+        #{fileId,jdbcType=BIGINT},
+      </if>
       <if test="articleId != null">
         #{articleId,jdbcType=BIGINT},
       </if>
@@ -72,14 +80,14 @@
       <if test="picUrl != null">
         #{picUrl,jdbcType=VARCHAR},
       </if>
-      <if test="createStaff != null">
-        #{createStaff,jdbcType=BIGINT},
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateStaff != null">
-        #{updateStaff,jdbcType=BIGINT},
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=BIGINT},
       </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
@@ -101,14 +109,14 @@
       <if test="picUrl != null">
         pic_url = #{picUrl,jdbcType=VARCHAR},
       </if>
-      <if test="createStaff != null">
-        create_staff = #{createStaff,jdbcType=BIGINT},
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=BIGINT},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateStaff != null">
-        update_staff = #{updateStaff,jdbcType=BIGINT},
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=BIGINT},
       </if>
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
@@ -124,9 +132,9 @@
     set article_id = #{articleId,jdbcType=BIGINT},
       file_name = #{fileName,jdbcType=VARCHAR},
       pic_url = #{picUrl,jdbcType=VARCHAR},
-      create_staff = #{createStaff,jdbcType=BIGINT},
+      create_user = #{createUser,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_staff = #{updateStaff,jdbcType=BIGINT},
+      update_user = #{updateUser,jdbcType=BIGINT},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       remark = #{remark,jdbcType=VARCHAR}
     where file_id = #{fileId,jdbcType=BIGINT}

@@ -7,11 +7,14 @@ import com.blog.core.system.extend.UploadFileDetails;
 import com.blog.core.system.mapper.BlogArticleFileMapper;
 import com.blog.core.system.mapper.BlogArticleMapper;
 import com.blog.core.system.service.IBlogService;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +36,14 @@ public class BlogServiceImpl implements IBlogService {
     public void createBlogArticle(Map<String, Object> paramMap) {
         String content =  paramMap.get("content").toString();
         String status = paramMap.get("status").toString();
-        List<UploadFileDetails> files = (List<UploadFileDetails>)paramMap.get("files");
+        List<UploadFileDetails> files = new ArrayList<>();
+        JSONArray jsonArray  = JSONArray.fromObject(paramMap.get("files").toString());
+        for(int i = 0 ; i < jsonArray.size(); i++){
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            UploadFileDetails uploadFileDetails = (UploadFileDetails)JSONObject.toBean(jsonObject,UploadFileDetails.class);
+            files.add(uploadFileDetails);
+        }
+
         String userId = paramMap.get("userId").toString();
         Date currentTime = new Date();
 
@@ -59,10 +69,10 @@ public class BlogServiceImpl implements IBlogService {
                 long fileId= idGeneratorConfig.getId();
                 blogArticleFile.setFileId(fileId);
                 blogArticleFile.setArticleId(articleId);
-                blogArticleFile.setCreateStaff(Long.parseLong(userId));
                 blogArticleFile.setPicUrl(file.getFileUrl());
                 blogArticleFile.setCreateTime(currentTime);
                 blogArticleFile.setFileName(file.getFileName());
+                blogArticleFile.setCreateUser(Long.parseLong(userId));
                 blogArticleFileMapper.insert(blogArticleFile);
             }
         }

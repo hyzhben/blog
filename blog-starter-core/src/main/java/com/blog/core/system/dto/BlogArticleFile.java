@@ -31,7 +31,7 @@ public class BlogArticleFile implements Serializable {
     /**
      * 创建人
      */
-    private Long createStaff;
+    private Long createUser;
 
     /**
      * 创建时间
@@ -41,7 +41,7 @@ public class BlogArticleFile implements Serializable {
     /**
      * 最后修改人
      */
-    private Long updateStaff;
+    private Long updateUser;
 
     /**
      * 最后修改时间
@@ -87,12 +87,12 @@ public class BlogArticleFile implements Serializable {
         this.picUrl = picUrl;
     }
 
-    public Long getCreateStaff() {
-        return createStaff;
+    public Long getCreateUser() {
+        return createUser;
     }
 
-    public void setCreateStaff(Long createStaff) {
-        this.createStaff = createStaff;
+    public void setCreateUser(Long createUser) {
+        this.createUser = createUser;
     }
 
     public Date getCreateTime() {
@@ -103,12 +103,12 @@ public class BlogArticleFile implements Serializable {
         this.createTime = createTime;
     }
 
-    public Long getUpdateStaff() {
-        return updateStaff;
+    public Long getUpdateUser() {
+        return updateUser;
     }
 
-    public void setUpdateStaff(Long updateStaff) {
-        this.updateStaff = updateStaff;
+    public void setUpdateUser(Long updateUser) {
+        this.updateUser = updateUser;
     }
 
     public Date getUpdateTime() {
@@ -143,9 +143,9 @@ public class BlogArticleFile implements Serializable {
             && (this.getArticleId() == null ? other.getArticleId() == null : this.getArticleId().equals(other.getArticleId()))
             && (this.getFileName() == null ? other.getFileName() == null : this.getFileName().equals(other.getFileName()))
             && (this.getPicUrl() == null ? other.getPicUrl() == null : this.getPicUrl().equals(other.getPicUrl()))
-            && (this.getCreateStaff() == null ? other.getCreateStaff() == null : this.getCreateStaff().equals(other.getCreateStaff()))
+            && (this.getCreateUser() == null ? other.getCreateUser() == null : this.getCreateUser().equals(other.getCreateUser()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
-            && (this.getUpdateStaff() == null ? other.getUpdateStaff() == null : this.getUpdateStaff().equals(other.getUpdateStaff()))
+            && (this.getUpdateUser() == null ? other.getUpdateUser() == null : this.getUpdateUser().equals(other.getUpdateUser()))
             && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
             && (this.getRemark() == null ? other.getRemark() == null : this.getRemark().equals(other.getRemark()));
     }
@@ -158,9 +158,9 @@ public class BlogArticleFile implements Serializable {
         result = prime * result + ((getArticleId() == null) ? 0 : getArticleId().hashCode());
         result = prime * result + ((getFileName() == null) ? 0 : getFileName().hashCode());
         result = prime * result + ((getPicUrl() == null) ? 0 : getPicUrl().hashCode());
-        result = prime * result + ((getCreateStaff() == null) ? 0 : getCreateStaff().hashCode());
+        result = prime * result + ((getCreateUser() == null) ? 0 : getCreateUser().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
-        result = prime * result + ((getUpdateStaff() == null) ? 0 : getUpdateStaff().hashCode());
+        result = prime * result + ((getUpdateUser() == null) ? 0 : getUpdateUser().hashCode());
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getRemark() == null) ? 0 : getRemark().hashCode());
         return result;
@@ -176,9 +176,9 @@ public class BlogArticleFile implements Serializable {
         sb.append(", articleId=").append(articleId);
         sb.append(", fileName=").append(fileName);
         sb.append(", picUrl=").append(picUrl);
-        sb.append(", createStaff=").append(createStaff);
+        sb.append(", createUser=").append(createUser);
         sb.append(", createTime=").append(createTime);
-        sb.append(", updateStaff=").append(updateStaff);
+        sb.append(", updateUser=").append(updateUser);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", remark=").append(remark);
         sb.append(", serialVersionUID=").append(serialVersionUID);

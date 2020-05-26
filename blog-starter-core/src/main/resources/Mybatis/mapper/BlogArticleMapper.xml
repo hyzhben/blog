@@ -34,17 +34,17 @@
     delete from blog_article
     where article_id = #{articleId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" keyColumn="article_id" keyProperty="articleId" parameterType="com.blog.core.system.dto.BlogArticle" useGeneratedKeys="true">
-    insert into blog_article (type_id, title, status,
-      create_user, create_time, update_user, 
-      update_time, remark, content
-      )
-    values (#{typeId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      #{createUser,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
-      )
+  <insert id="insert" parameterType="com.blog.core.system.dto.BlogArticle">
+    insert into blog_article (article_id, type_id, title, 
+      `status`, create_user, create_time, 
+      update_user, update_time, remark, 
+      content)
+    values (#{articleId,jdbcType=BIGINT}, #{typeId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{createUser,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="article_id" keyProperty="articleId" parameterType="com.blog.core.system.dto.BlogArticle" useGeneratedKeys="true">
+  <insert id="insertSelective" parameterType="com.blog.core.system.dto.BlogArticle">
     insert into blog_article
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="articleId != null">
@@ -169,7 +169,4 @@
       remark = #{remark,jdbcType=VARCHAR}
     where article_id = #{articleId,jdbcType=BIGINT}
   </update>
-  <select id="selectAll" resultType="com.blog.core.system.dto.BlogArticle">
-          select * from blog_article ba
-     </select>
 </mapper>
