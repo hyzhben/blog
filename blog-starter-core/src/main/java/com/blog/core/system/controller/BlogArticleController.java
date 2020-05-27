@@ -34,7 +34,6 @@ public class BlogArticleController {
             String title = request.getParameter("title");
             String typeId = request.getParameter("typeId");
             User user= (User)request.getSession().getAttribute("user");
-
             Map<String,Object> paramMap = new HashMap<String,Object>();
             if(content == null || StringUtils.isBlank(content)){
                 return Results.failureWithData("内容不能为空",BaseEnums.FAILURE.code(),BaseEnums.FAILURE.desc());

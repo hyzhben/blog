@@ -47,8 +47,8 @@ public class LoginController {
 
     @RequestMapping("/login/invalid")
     @ResponseBody
-    public String loginInvalid(){
-        return "invalid";
+    public Result loginInvalid(){
+        return Results.failure(BaseEnums.SESSION_OVERDUE.code(),BaseEnums.SESSION_OVERDUE.desc());
     }
 
     @RequestMapping("/login/out")

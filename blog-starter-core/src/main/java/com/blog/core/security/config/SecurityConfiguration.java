@@ -34,7 +34,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http
         //开启跨域cors()
-                .cors().and().csrf().disable()
+//                .cors().and().csrf().disable()
                 .authorizeRequests().requestMatchers(CorsUtils::isCorsRequest)
                 .permitAll()
                 .and()
@@ -83,4 +83,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
+
 }
