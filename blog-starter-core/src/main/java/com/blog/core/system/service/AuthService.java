@@ -1,5 +1,7 @@
 package com.blog.core.system.service;
 
+import com.blog.core.constants.BaseEnums;
+import com.blog.core.exception.ClaimTokenException;
 import com.blog.core.system.dto.AuthToken;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +40,7 @@ public class AuthService {
         //请求spring security申请令牌
         AuthToken authToken = this.applyToken(username,password,clientId,clientSecret);
         if(authToken == null){
-             new Exception("申请令牌失败！");
+            throw new ClaimTokenException(BaseEnums.FAIL_USERNMAE_OR_PASSWORD.desc());
         }
         //用户身份令牌
         String access_token = authToken.getAccess_token();
@@ -48,7 +50,7 @@ public class AuthService {
         //将令牌存储到redis
         boolean result = this.saveToken(access_token,jsonString,tokenValiditySeconds);
         if(!result){
-            new Exception("申请令牌失败！");
+            throw new ClaimTokenException(BaseEnums.CLAIM_TOKEN_EXCEPTION.desc());
         }
         return authToken;
     }
@@ -60,7 +62,7 @@ public class AuthService {
      *      * @param ttl 过期时间
      */
     private boolean saveToken(String access_token,String content,long ttl){
-        String key = "user_token:"+access_token;
+        String key = access_token;
         stringRedisTemplate.boundValueOps(key).set(content,ttl, TimeUnit.SECONDS);
         Long expire = stringRedisTemplate.getExpire(key,TimeUnit.SECONDS);
         return expire>0;
@@ -69,7 +71,7 @@ public class AuthService {
     //申请令牌
     private AuthToken applyToken(String username, String password, String clientId, String clientSecret){
         //令牌申请的地址
-        String authUrl = "http://localhost:8085/oauth/token";
+        String authUrl = "http://localhost:8081/oauth/token";
         //定义header
         LinkedMultiValueMap<String, String> header = new LinkedMultiValueMap<>();
         String httpBasic = getHttpBasic(clientId, clientSecret);
@@ -104,9 +106,9 @@ public class AuthService {
             return null;
         }
         AuthToken authToken = new AuthToken();
-        authToken.setAccess_token((String) bodyMap.get("jti"));//用户身份令牌
+        authToken.setAccess_token((String) bodyMap.get("access_token"));//用户身份令牌
         authToken.setRefresh_token((String) bodyMap.get("refresh_token"));//刷新令牌
-        authToken.setJwt_token((String) bodyMap.get("access_token"));//jwt令牌
+        authToken.setJwt_token((String) bodyMap.get("jti"));//jwt令牌
         return authToken;
     }
 

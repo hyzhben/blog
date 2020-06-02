@@ -39,6 +39,7 @@
         <security-jwt.version>1.0.9.RELEASE</security-jwt.version>
         <validation-api>1.1.0.Final</validation-api>
         <tomcat-servlet-api>8.0.36</tomcat-servlet-api>
+        <shiro-web.version>1.3.2</shiro-web.version>
     </properties>
 
     <dependencies>

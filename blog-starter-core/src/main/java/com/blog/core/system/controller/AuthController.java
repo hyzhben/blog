@@ -2,7 +2,9 @@ package com.blog.core.system.controller;
 
 
 import com.alibaba.druid.util.StringUtils;
+import com.blog.core.base.BaseEnum;
 import com.blog.core.base.Result;
+import com.blog.core.constants.BaseEnums;
 import com.blog.core.system.dto.AuthToken;
 import com.blog.core.system.service.AuthService;
 import com.blog.core.util.CookieUtil;
@@ -35,17 +37,17 @@ public class AuthController {
     @Autowired
     AuthService authService;
 
-    @PostMapping("/userlogin")
+    @PostMapping("/login")
      public Result login(HttpServletRequest request){
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
         if(username == null || StringUtils.isEmpty(username)){
-            return  Results.failureWithData("请输入姓名","1001","错误");
+            return  Results.failureWithData("姓名不能为空",BaseEnums.FAILURE.code(), BaseEnums.FAILURE.desc());
         }
 
         if(password == null || StringUtils.isEmpty(password)){
-            return  Results.failureWithData("请输入密码","1001","错误");
+            return  Results.failureWithData("密码不能为空",BaseEnums.FAILURE.code(), BaseEnums.FAILURE.desc());
         }
 
         //申请令牌
@@ -57,7 +59,7 @@ public class AuthController {
         //将令牌存储到cookie
         this.saveCookie(access_token);
 
-        return  Results.successWithData(access_token,"1000","登录成功");
+        return  Results.successWithData(access_token, BaseEnums.SUCCESS.code(),BaseEnums.SUCCESS.desc());
     }
 
     //将令牌存储到cookie
@@ -66,6 +68,7 @@ public class AuthController {
         CookieUtil.addCookie(response,cookieDomain,"/","uid",token,cookieMaxAge,false);
     }
 
+    @PostMapping("/loginOut")
     public Result logout() {
         return null;
     }

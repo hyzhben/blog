@@ -1,5 +1,6 @@
 package com.blog.core.system.controller;
 
+import com.blog.core.base.BaseController;
 import com.blog.core.base.Result;
 import com.blog.core.constants.BaseEnums;
 import com.blog.core.system.dto.User;
@@ -18,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-public class BlogArticleController {
+public class BlogArticleController extends BaseController<BlogArticleController> {
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 
     @Autowired
@@ -26,14 +27,20 @@ public class BlogArticleController {
 
     @RequestMapping(value="/service/blog/createArticle")
     @ResponseBody
-    public Result createArticle(HttpServletRequest request){
+    public Result createArticle(){
         try{
             String content = request.getParameter("content");
             String status = request.getParameter("status");
             String files = request.getParameter("files");
             String title = request.getParameter("title");
             String typeId = request.getParameter("typeId");
-            User user= (User)request.getSession().getAttribute("user");
+
+            User user = getToken();
+
+            if(user == null){
+                return Results.failure(BaseEnums.TOKEN_OVERDUE.code(), BaseEnums.TOKEN_OVERDUE.desc());
+            }
+
             Map<String,Object> paramMap = new HashMap<String,Object>();
             if(content == null || StringUtils.isBlank(content)){
                 return Results.failureWithData("内容不能为空", BaseEnums.FAILURE.code(), BaseEnums.FAILURE.desc());
@@ -60,8 +67,7 @@ public class BlogArticleController {
             paramMap.put("userId",user.getUserId());
 
             blogService.createBlogArticle(paramMap);
-
-            return Results.successWithData(user, BaseEnums.SUCCESS.code(), BaseEnums.SUCCESS.desc());
+            return Results.successWithData(BaseEnums.SUCCESS.code(), BaseEnums.SUCCESS.desc());
         }catch (Exception e){
             logger.error(e.getMessage());
             return Results.failure(BaseEnums.FAILURE.code(), BaseEnums.FAILURE.desc());

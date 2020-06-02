@@ -32,7 +32,9 @@ public enum BaseEnums implements BaseEnum<String,String> {
 
     FAIL_USERNMAE_OR_PASSWORD("10001","用户名或密码错误"),
 
-    SESSION_OVERDUE("10002","session过期,请重新登录");
+    TOKEN_OVERDUE("10002","Token过期,请重新登录"),
+
+    CLAIM_TOKEN_EXCEPTION("10003","申请令牌失败");
 
     private String code;
 

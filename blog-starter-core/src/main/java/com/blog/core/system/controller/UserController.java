@@ -22,7 +22,7 @@ import java.util.Map;
  * 用户Controller
  */
 @RestController
-public class UserController extends BaseController {
+public class UserController extends BaseController<UserController> {
 
     @Autowired
     private ISysService sysService;

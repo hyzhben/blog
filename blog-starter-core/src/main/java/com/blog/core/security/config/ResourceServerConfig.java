@@ -2,10 +2,22 @@
 package com.blog.core.security.config;
 
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.stream.Collectors;
 
 
 /**
@@ -19,6 +31,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
@@ -34,7 +47,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
         http.csrf().disable()//禁用了csrf（跨站请求伪造）功能
             .authorizeRequests()
-            .antMatchers("/oauth/**","/userlogin").permitAll()//放行的路径
+            .antMatchers("/oauth/**","/loginOut","login").permitAll()//放行的路径
             .anyRequest()
             .authenticated();
     }

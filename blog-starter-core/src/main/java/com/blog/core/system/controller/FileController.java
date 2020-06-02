@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class FileController extends BaseController {
+public class FileController extends BaseController<FileController> {
 
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 
@@ -48,13 +48,5 @@ public class FileController extends BaseController {
                 }
             }
             return Results.successWithData(picInfoList, BaseEnums.SUCCESS.code(), BaseEnums.SUCCESS.desc());
-    }
-
-    @PostMapping(value="/service/blog/test2")
-    @ResponseBody
-        public List<String> test2(MultipartFile[] files, HttpServletRequest request){
-        List<String> picUrlList = new ArrayList<>();
-        picUrlList= UploadUtils.uploadFiles(files);
-        return picUrlList;
     }
 }

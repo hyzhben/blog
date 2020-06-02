@@ -6,14 +6,15 @@ import org.springframework.security.authentication.InternalAuthenticationService
  * 密码错误异常
  *
  */
-public class PasswordErrorException extends InternalAuthenticationServiceException {
-
-    public PasswordErrorException(String message, Throwable cause) {
-        super(message, cause);
-    }
+public class PasswordErrorException extends BaseException {
+    public PasswordErrorException() {}
 
     public PasswordErrorException(String message) {
         super(message);
+    }
+
+    public PasswordErrorException(String code, String message) {
+        super(code, message);
     }
 
 }
