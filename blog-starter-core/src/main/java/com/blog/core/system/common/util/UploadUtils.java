@@ -1,4 +1,4 @@
-package com.blog.core.util;
+package com.blog.core.system.common.util;
 
 import com.blog.core.config.ApplicationContextConfig;
 import com.blog.core.config.FtpConfig;

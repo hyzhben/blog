@@ -2,7 +2,7 @@ package com.blog.core.base;
 
 import com.blog.core.constants.Constants;
 import com.blog.core.exception.UpdateFailedException;
-import com.blog.core.util.Reflections;
+import com.blog.core.system.common.util.Reflections;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;

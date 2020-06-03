@@ -1,4 +1,4 @@
-package com.blog.core.util;
+package com.blog.core.system.common.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

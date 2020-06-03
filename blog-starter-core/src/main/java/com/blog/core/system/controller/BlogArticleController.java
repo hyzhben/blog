@@ -3,10 +3,12 @@ package com.blog.core.system.controller;
 import com.blog.core.base.BaseController;
 import com.blog.core.base.Result;
 import com.blog.core.constants.BaseEnums;
+import com.blog.core.system.common.enums.BlogArticleStatusEnums;
 import com.blog.core.system.dto.User;
 import com.blog.core.system.service.IBlogService;
-import com.blog.core.util.Results;
+import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
+import com.blog.core.system.common.util.Results;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +26,10 @@ public class BlogArticleController extends BaseController<BlogArticleController>
     @Autowired
     private IBlogService blogService;
 
+    /**
+     * 文章新增
+     * @return
+     */
     @RequestMapping(value="/service/blog/createArticle")
     @ResponseBody
     public Result createArticle(){
@@ -69,6 +74,31 @@ public class BlogArticleController extends BaseController<BlogArticleController>
             blogService.createBlogArticle(paramMap);
             return Results.successWithData(BaseEnums.SUCCESS.code(), BaseEnums.SUCCESS.desc());
         }catch (Exception e){
+            logger.error(e.getMessage());
+            return Results.failure(BaseEnums.FAILURE.code(), BaseEnums.FAILURE.desc());
+        }
+    }
+
+    /**
+     * 文章列表查询
+     */
+    @RequestMapping(value="/service/blog/qryBlogArticle")
+    @ResponseBody
+    public Result qryBlogArticle(){
+        String currentPage = request.getParameter("currentPage");
+        String pageSize = request.getParameter("pageSize");
+        try{
+            if(currentPage == null || StringUtils.isBlank(currentPage)){
+                return Results.failureWithData("当前页不能为空",BaseEnums.FAILURE.code(), BaseEnums.FAILURE.desc());
+            }
+            if(pageSize == null || StringUtils.isBlank(pageSize)){
+                return Results.failureWithData("一页大小不能为空",BaseEnums.FAILURE.code(), BaseEnums.FAILURE.desc());
+            }
+            Map<String,Object> paramMap = new HashMap<>();
+            paramMap.put("status", BlogArticleStatusEnums.PUBLISH.getValue());
+            PageInfo result = blogService.qryArticleByPage(Integer.parseInt(currentPage),Integer.parseInt(pageSize),paramMap);
+             return Results.successWithData(result,BaseEnums.SUCCESS.code(), BaseEnums.SUCCESS.desc());
+          }catch (Exception e){
             logger.error(e.getMessage());
             return Results.failure(BaseEnums.FAILURE.code(), BaseEnums.FAILURE.desc());
         }

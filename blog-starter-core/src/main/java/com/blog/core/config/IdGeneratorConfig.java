@@ -1,7 +1,7 @@
 package com.blog.core.config;
 
 
-import com.blog.core.util.IdWorker;
+import com.blog.core.system.common.util.IdWorker;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

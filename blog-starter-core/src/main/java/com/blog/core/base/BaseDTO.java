@@ -1,6 +1,6 @@
 package com.blog.core.base;
 
-import com.blog.core.util.Dates;
+import com.blog.core.system.common.util.Dates;
 import com.fasterxml.jackson.annotation.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;

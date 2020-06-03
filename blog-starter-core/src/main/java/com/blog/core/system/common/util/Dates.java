@@ -1,4 +1,4 @@
-package com.blog.core.util;
+package com.blog.core.system.common.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;

@@ -4,7 +4,7 @@ import com.blog.core.base.Result;
 import com.blog.core.constants.BaseEnums;
 import com.blog.core.exception.BaseException;
 import com.blog.core.exception.ServiceException;
-import com.blog.core.util.Results;
+import com.blog.core.system.common.util.Results;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

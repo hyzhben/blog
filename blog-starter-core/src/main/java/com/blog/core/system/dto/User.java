@@ -1,7 +1,7 @@
 package com.blog.core.system.dto;
 
 import com.blog.core.base.BaseDTO;
-import com.blog.core.util.Dates;
+import com.blog.core.system.common.util.Dates;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;

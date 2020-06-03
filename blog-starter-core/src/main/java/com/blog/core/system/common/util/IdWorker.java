@@ -1,4 +1,4 @@
-package com.blog.core.util;
+package com.blog.core.system.common.util;
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
 import java.net.NetworkInterface;

@@ -1,4 +1,4 @@
-package com.blog.core.util;
+package com.blog.core.system.common.util;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

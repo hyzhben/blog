@@ -5,7 +5,7 @@ import com.blog.core.base.Result;
 import com.blog.core.constants.BaseEnums;
 import com.blog.core.system.dto.User;
 import com.blog.core.system.service.ISysService;
-import com.blog.core.util.Results;
+import com.blog.core.system.common.util.Results;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;

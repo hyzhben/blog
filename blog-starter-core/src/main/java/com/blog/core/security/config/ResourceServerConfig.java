@@ -47,7 +47,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
         http.csrf().disable()//禁用了csrf（跨站请求伪造）功能
             .authorizeRequests()
-            .antMatchers("/oauth/**","/loginOut","login").permitAll()//放行的路径
+            .antMatchers("/oauth/**","/loginOut","login","/**").permitAll()//放行的路径
             .anyRequest()
             .authenticated();
     }

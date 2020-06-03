@@ -7,9 +7,13 @@ import com.blog.core.system.extend.UploadFileDetails;
 import com.blog.core.system.mapper.BlogArticleFileMapper;
 import com.blog.core.system.mapper.BlogArticleMapper;
 import com.blog.core.system.service.IBlogService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.net.nntp.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -76,5 +80,13 @@ public class BlogServiceImpl implements IBlogService {
                 blogArticleFileMapper.insert(blogArticleFile);
             }
         }
+    }
+
+    @Override
+    public PageInfo qryArticleByPage(int page, int pageSize,Map<String,Object> paramMap) {
+        PageHelper.startPage(page,pageSize);
+        List<BlogArticle> list=blogArticleMapper.qryArticleList(paramMap);
+        PageInfo pageInfo = new PageInfo(list);
+        return pageInfo;
     }
 }

@@ -2,13 +2,12 @@ package com.blog.core.system.controller;
 
 
 import com.alibaba.druid.util.StringUtils;
-import com.blog.core.base.BaseEnum;
 import com.blog.core.base.Result;
 import com.blog.core.constants.BaseEnums;
 import com.blog.core.system.dto.AuthToken;
 import com.blog.core.system.service.AuthService;
-import com.blog.core.util.CookieUtil;
-import com.blog.core.util.Results;
+import com.blog.core.system.common.util.CookieUtil;
+import com.blog.core.system.common.util.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
