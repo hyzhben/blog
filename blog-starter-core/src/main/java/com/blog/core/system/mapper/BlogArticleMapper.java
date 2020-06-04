@@ -14,4 +14,6 @@ public interface BlogArticleMapper extends Mapper<BlogArticle> {
 
     public List<BlogArticle> qryArticleList(Map<String,Object> paramMap);
 
+    public List<BlogArticle> qryNewestArticle();
+
 }

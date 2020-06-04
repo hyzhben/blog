@@ -37,4 +37,9 @@ public class SysServiceImpl implements ISysService {
     public User qryUserByUsername(String username) {
         return userMapper.qryUserByUsername(username);
     }
+
+    @Override
+    public List<User> qryUserByIds(List<Long> idsList) {
+        return userMapper.qryUserByIds(idsList);
+    }
 }

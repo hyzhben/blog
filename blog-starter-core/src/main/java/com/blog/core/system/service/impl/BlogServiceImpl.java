@@ -26,7 +26,6 @@ import java.util.Map;
 @Service
 @Transactional
 public class BlogServiceImpl implements IBlogService {
-
     @Autowired
     private IdGeneratorConfig idGeneratorConfig;
 
@@ -88,5 +87,10 @@ public class BlogServiceImpl implements IBlogService {
         List<BlogArticle> list=blogArticleMapper.qryArticleList(paramMap);
         PageInfo pageInfo = new PageInfo(list);
         return pageInfo;
+    }
+
+    @Override
+    public List<BlogArticle> qryNewestArticle() {
+        return blogArticleMapper.qryNewestArticle();
     }
 }

@@ -38,4 +38,11 @@
       <include refid="mgr_condition_sql" />
     </where>
   </select>
+
+  <select id="qryNewestArticle" resultMap="BaseMgrResultMap">
+     select * from blog_article
+     where status = 2000
+     order by create_time desc
+     limit 5
+  </select>
 </mapper>

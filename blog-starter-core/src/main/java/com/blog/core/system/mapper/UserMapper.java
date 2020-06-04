@@ -16,4 +16,6 @@ public interface UserMapper extends Mapper<User> {
     List<User> qryUserByList(Map<String, Object> param);
 
     User qryUserByUsername(String username);
+
+    List<User> qryUserByIds(List<Long> idsList);
 }

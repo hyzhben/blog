@@ -48,6 +48,8 @@ public class User extends BaseDTO {
      */
     private Integer enabled;
 
+    private String picUrl;
+
 
     public Long getUserId() {
         return userId;
@@ -105,4 +107,11 @@ public class User extends BaseDTO {
         this.enabled = enabled;
     }
 
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
+    }
 }

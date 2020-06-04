@@ -4,19 +4,25 @@ import com.blog.core.base.BaseController;
 import com.blog.core.base.Result;
 import com.blog.core.constants.BaseEnums;
 import com.blog.core.system.common.enums.BlogArticleStatusEnums;
+import com.blog.core.system.dto.BlogArticle;
 import com.blog.core.system.dto.User;
+import com.blog.core.system.extend.MBlogArticle;
 import com.blog.core.system.service.IBlogService;
+import com.blog.core.system.service.ISysService;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import com.blog.core.system.common.util.Results;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -25,6 +31,9 @@ public class BlogArticleController extends BaseController<BlogArticleController>
 
     @Autowired
     private IBlogService blogService;
+
+    @Autowired
+    private ISysService sysService;
 
     /**
      * 文章新增
@@ -72,7 +81,7 @@ public class BlogArticleController extends BaseController<BlogArticleController>
             paramMap.put("userId",user.getUserId());
 
             blogService.createBlogArticle(paramMap);
-            return Results.successWithData(BaseEnums.SUCCESS.code(), BaseEnums.SUCCESS.desc());
+            return Results.successWithData("文章上传成功",BaseEnums.SUCCESS.code(), BaseEnums.SUCCESS.desc());
         }catch (Exception e){
             logger.error(e.getMessage());
             return Results.failure(BaseEnums.FAILURE.code(), BaseEnums.FAILURE.desc());
@@ -97,8 +106,51 @@ public class BlogArticleController extends BaseController<BlogArticleController>
             Map<String,Object> paramMap = new HashMap<>();
             paramMap.put("status", BlogArticleStatusEnums.PUBLISH.getValue());
             PageInfo result = blogService.qryArticleByPage(Integer.parseInt(currentPage),Integer.parseInt(pageSize),paramMap);
+
+            List<MBlogArticle> mBlogArticleList = new ArrayList<MBlogArticle>();
+            if(result.getList().size()>0){
+                BlogArticle blogArticle = null;
+                List<Long> idsList = new ArrayList<>();
+                for(Object object : result.getList()){
+                    blogArticle = (BlogArticle)object;
+                    idsList.add(blogArticle.getCreateUser());
+                }
+                List<User> userList = sysService.qryUserByIds(idsList);
+                Map<Long,Object> userMap = new HashMap<>();
+                for(User user : userList){
+                    userMap.put(user.getUserId(),user.getPicUrl());
+                }
+
+                //翻译
+                MBlogArticle mBlogArticle = null;
+                for(Object object : result.getList()){
+                    blogArticle = (BlogArticle)object;
+                    mBlogArticle = new MBlogArticle();
+                    BeanUtils.copyProperties(blogArticle,mBlogArticle);
+                    mBlogArticle.setPicUrl(userMap.get(mBlogArticle.getCreateUser()).toString());
+                    mBlogArticleList.add(mBlogArticle);
+                }
+
+            }
+            result.setList(mBlogArticleList);
              return Results.successWithData(result,BaseEnums.SUCCESS.code(), BaseEnums.SUCCESS.desc());
           }catch (Exception e){
+            logger.error(e.getMessage());
+            return Results.failure(BaseEnums.FAILURE.code(), BaseEnums.FAILURE.desc());
+        }
+    }
+
+    /**
+     * 最新发布文章
+     * @return
+     */
+    @RequestMapping("/service/blog/qryNewestArticle")
+    @ResponseBody
+    public Result qryNewestArticle(){
+        try{
+            List<BlogArticle> blogArticleList = blogService.qryNewestArticle();
+            return Results.successWithData(blogArticleList,BaseEnums.SUCCESS.code(), BaseEnums.SUCCESS.desc());
+        }catch (Exception e){
             logger.error(e.getMessage());
             return Results.failure(BaseEnums.FAILURE.code(), BaseEnums.FAILURE.desc());
         }

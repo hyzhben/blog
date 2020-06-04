@@ -10,4 +10,6 @@ public interface ISysService {
 
     User qryUserByUsername(String username);
 
+    List<User> qryUserByIds(List<Long> idsList);
+
 }
